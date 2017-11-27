@@ -175,11 +175,11 @@ def SEND_MESSAGE(op):
     try:
         if msg.toType == 0:
             if msg.contentType == 0:
-                if msg.text == "mid":
+                if msg.text == "รหัส":
                     sendMessage(msg.to, msg.to)
-                if msg.text == "me":
+                if msg.text == "ฉัน":
                     sendMessage(msg.to, text=None, contentMetadata={'mid': msg.from_}, contentType=13)
-                if msg.text == "gift":
+                if msg.text == "กิ๊ฟ":
                     sendMessage(msg.to, text="gift sent", contentMetadata=None, contentType=9)
                 else:
                     pass
@@ -198,17 +198,17 @@ def SEND_MESSAGE(op):
                 pass
         if msg.toType == 2:
             if msg.contentType == 0:
-                if msg.text == "mid":
+                if msg.text == "รหัส":
                     sendMessage(msg.to, msg.from_)
-                if msg.text == "gid":
+                if msg.text == "รหัสกลุ่ม":
                     sendMessage(msg.to, msg.to)
-                if msg.text == "ginfo":
+                if msg.text == "ข้อมูลกลุ่ม":
                     group = client.getGroup(msg.to)
-                    md = "[Group Name]\n" + group.name + "\n\n[gid]\n" + group.id + "\n\n[Group Picture]\nhttp://dl.profile.line-cdn.net/" + group.pictureStatus
-                    if group.preventJoinByTicket is False: md += "\n\nInvitationURL: Permitted\n"
-                    else: md += "\n\nInvitationURL: Refusing\n"
-                    if group.invitee is None: md += "\nMembers: " + str(len(group.members)) + "人\n\nInviting: 0People"
-                    else: md += "\nMembers: " + str(len(group.members)) + "People\nInvited: " + str(len(group.invitee)) + "People"
+                    md = "[ชื่อกลุ่ม]\n" + group.name + "\n\n[รหัส]\n" + group.id + "\n\n[รูปภาพกลุ่ม]\nhttp://dl.profile.line-cdn.net/" + group.pictureStatus
+                    if group.preventJoinByTicket is False: md += "\n\nคำเชิญ URL: ที่ได้รับอนุญาต\n"
+                    else: md += "\n\nคำเชิญ URL: ปฏิเสธ\n"
+                    if group.invitee is None: md += "\nสมาชิก: " + str(len(group.members)) + "คน\n\nเชิญ: 0คน"
+                    else: md += "\nสมาชิก: " + str(len(group.members)) + "คน\nเชิญ: " + str(len(group.invitee)) + "คน"
                     sendMessage(msg.to,md)
                 if msg.text in ["คำสั่ง","Help","help"]:
                     sendMessage(msg.to,"¤ คำสั่งเซลบอท¤\n\n¤ me\n¤ mid \n¤ เช็คความเร็ว\n¤ กลุ่ม\n¤ gid\n¤ ginfo\n¤ ลิ้ง\n¤ เปิดลิ้ง\n¤ ปิดลิ้ง\n¤ แท็ก\n¤ นับ 「เริ่มเช็คคนอ่าน」\n¤ อ่าน 「อ่านคนแอบ」\n¤ คัดลอกข้อมูล @\n¤ สำรองข้อมูล\n¤ บล็อก @\n¤ รายการบล็อก")
@@ -223,16 +223,16 @@ def SEND_MESSAGE(op):
                     group.name = key
                     client.updateGroup(group)
                     sendMessage(msg.to,"Group Name"+key+"Canged to")
-                if msg.text == "ลิ้ง":
+                if msg.text == "ลิ้งค์":
                     sendMessage(msg.to,"line://ti/g/" + client._client.reissueGroupTicket(msg.to))
-                if msg.text == "เปิดลิ้ง":
+                if msg.text == "เปิดลิ้งค์":
                     group = client.getGroup(msg.to)
                     if group.preventJoinByTicket == False:
                         sendMessage(msg.to, "เปิดอยู่แล้ว")
                     else:
                         group.preventJoinByTicket = False
                         client.updateGroup(group)
-                        sendMessage(msg.to, "URL Open")
+                        sendMessage(msg.to, "เปิดลิ้งค์เรียบร้อย")
                 if msg.text == "ปิดลิ้ง":
                     group = client.getGroup(msg.to)
                     if group.preventJoinByTicket == True:
@@ -240,7 +240,7 @@ def SEND_MESSAGE(op):
                     else:
                         group.preventJoinByTicket = True
                         client.updateGroup(group)
-                        sendMessage(msg.to, "URL close")
+                        sendMessage(msg.to, "ปิดลิ้งค์เรียบร้อย")
                 if msg.text == "ยกเลิก":
                     group = client.getGroup(msg.to)
                     if group.invitee is None:
@@ -255,7 +255,7 @@ def SEND_MESSAGE(op):
                     client.inviteIntoGroup(msg.to, [key])
                     contact = client.getContact(key)
                     sendMessage(msg.to, ""+contact.displayName+" that's my friend's permission to inpit")
-                if msg.text == "me":
+                if msg.text == "ฉัน":
                     M = Message()
                     M.to = msg.to
                     M.contentType = 13
@@ -267,8 +267,8 @@ def SEND_MESSAGE(op):
                     contact = client.getContact(key)
                     sendMessage(msg.to, ""+contact.displayName+"'s contact")
                 if msg.text == "เวลา":
-                    sendMessage(msg.to, "today " + datetime.datetime.today().strftime('%d-%m-%Y %H:%M:%S') + " WIB")
-                if msg.text == "gift":
+                    sendMessage(msg.to, "เวลาขณะนี้ " + datetime.datetime.today().strftime('%d-%m-%Y %H:%M:%S') + " TH")
+                if msg.text == "กิ๊ฟ":
                     sendMessage(msg.to, text="gift sent", contentMetadata=None, contentType=9)
                 if msg.text == "นับ":
                     sendMessage(msg.to, "รอสักครู่กำลังเช็ค")
@@ -301,7 +301,7 @@ def SEND_MESSAGE(op):
                     h = ""
                     for i in gid:
                         h += "[★] %s\n" % (client.getGroup(i).name +"→["+str(len(client.getGroup(i).members))+"]")
-                    sendMessage(msg.to,"[List Group]\n"+ h +"Total Group =" +"["+str(len(gid))+"]")
+                    sendMessage(msg.to,"[รายชื่อกลุ่ม]\n"+ h +"กลุ่มรวม =" +"["+str(len(gid))+"]")
                 if msg.text in["แท็ก"]:
                      group = client.getGroup(msg.to)
                      nama = [contact.mid for contact in group.members]
@@ -337,7 +337,7 @@ def SEND_MESSAGE(op):
                      if jml > 500:
                          print "มากกว่า 500+"
                      cnt = Message()
-                     cnt.text = "Done:"+str(jml)
+                     cnt.text = "เรียบร้อย:"+str(jml)
                      cont.to = msg.to
                      client.sendMessage(cnt)                     
                 elif "คัดลอกข้อมูล @" in msg.text:
@@ -358,23 +358,13 @@ def SEND_MESSAGE(op):
                                 sendMessage(msg.to, "รายการคัคลอกข้อมูลสำเร็จ ~")
                             except Exception as e:
                                 print e    
-                elif msg.text in ["สำรองข้อมูล","backup"]:
+                elif msg.text in ["สำรองข้อมูล"]:
                     try:
                         client.updateDisplayPicture(backup.pictureStatus)
                         client.updateProfile(backup)
                         sendMessage(msg.to, "สำรองข้อมูลสำเร็จ")
                     except Exception as e:
                         sendMessage(msg.to, str(e))
-                elif msg.text.lower() == 'รายการบล็อก':
-                    blockedlist = client.getBlockedContactIds()
-                    sendMessage(msg.to, "รอสักครู่กำลังเช็คข้อมูล...")
-                    kontak = client.getContacts(blockedlist)
-                    num=1
-                    msgs="User Blocked List\n"
-                    for ids in kontak:
-                        msgs+="\n%i. %s" % (num, ids.displayName)
-                        num=(num+1)
-                    msgs+="\n\nTotal %i blocked user(s)" % len(kontak)
                 elif "บล็อก @" in msg.text:
                     if msg.toType == 2:
                         print "[block] OK"
@@ -403,7 +393,7 @@ def SEND_MESSAGE(op):
                     for ids in kontak:
                         msgs+="\n%i. %s" % (num, ids.displayName)
                         num=(num+1)
-                    msgs+="\n\nTotal %i blocked user(s)" % len(kontak)
+                    msgs+="\n\nทั้งหมด %i ผู้ใช้ที่ถูกบล็อก(s)" % len(kontak)
                     sendMessage(msg.to, msgs)
                 elif "ส่งข้อมูล " in msg.text:
                     cond = msg.text.split(" ")
@@ -411,7 +401,7 @@ def SEND_MESSAGE(op):
                     text = msg.text.replace("Send " + str(target) + " Chat ","")
                     try:
                         client.findAndAddContactsByMid(target)
-                        sendMessage(target,"From treebot : \"" + text + "\"")
+                        sendMessage(target,"จาก treebot : \"" + text + "\"")
                         sendMessage(msg.to,"ส่งข้อความเรียบร้อยแล้ว")
                     except:
                         sendMessage(msg.to,"ไม่สามารถส่งข้อความอยาจมีข้อมูลผิดพลาด")
