@@ -93,7 +93,7 @@ tracer.addOpInterrupt(5,NOTIFIED_ADD_CONTACT)
 
 def NOTIFIED_ACCEPT_GROUP_INVITATION(op):
     try:
-        sendMessage(op.param1, client.getContact(op.param2).displayName + ", ยินดีต้อนรับ\n(*´･ω･*) ")
+        sendMessage(op.param1, client.getContact(op.param2).displayName + ", ยินดีต้อนรับสมาชิกใหม่\n(*´･ω･*) ")
     except Exception as e:
         print e
         print ("\n\nNOTIFIED_ACCEPT_GROUP_INVITATION\n\n")
@@ -103,7 +103,7 @@ tracer.addOpInterrupt(17,NOTIFIED_ACCEPT_GROUP_INVITATION)
 
 def NOTIFIED_KICKOUT_FROM_GROUP(op):
     try:
-        sendMessage(op.param1, client.getContact(op.param3).displayName + ", โชคดีนะ แล้วพบกันใหม่\n(*´･ω･*) ")
+        sendMessage(op.param1, client.getContact(op.param3).displayName + ", โชคดีนะ แล้วพบกันใหม่ นะ\n(*´･ω･*) ")
     except Exception as e:
         print e
         print ("\n\nNOTIFIED_KICKOUT_FROM_GROUP\n\n")
@@ -113,7 +113,7 @@ tracer.addOpInterrupt(19,NOTIFIED_KICKOUT_FROM_GROUP)
 
 def NOTIFIED_LEAVE_GROUP(op):
     try:
-        sendMessage(op.param1, client.getContact(op.param2).displayName + ", โชคดีนะ แล้วพบกันใหม่\n(*´･ω･*) ")
+        sendMessage(op.param1, client.getContact(op.param2).displayName + ", โชคดีนะ แล้วพบกันใหม่ นะ\n(*´･ω･*) ")
     except Exception as e:
         print e
         print ("\n\nNOTIFIED_LEAVE_GROUP\n\n")
@@ -211,7 +211,7 @@ def SEND_MESSAGE(op):
                     else: md += "\nสมาชิก: " + str(len(group.members)) + "คน\nเชิญ: " + str(len(group.invitee)) + "คน"
                     sendMessage(msg.to,md)
                 if msg.text in ["คำสั่ง","Help","help"]:
-                    sendMessage(msg.to,"¤ คำสั่งเซลบอท¤\n\n¤ me\n¤ mid \n¤ เช็คความเร็ว\n¤ กลุ่ม\n¤ รหัสกลุ่ม\n¤ ข้อมูลกลุ่ม\n¤ ลิ้ง\n¤ เปิดลิ้ง\n¤ ปิดลิ้ง\n¤ แท็ก\n¤ นับ 「เริ่มเช็คคนอ่าน」\n¤ อ่าน 「อ่านคนแอบ」\n¤ คัดลอกข้อมูล @\n¤ สำรองข้อมูล\n¤ บล็อก @\n¤ รายการบล็อก")
+                    sendMessage(msg.to,"¤ คำสั่งเซลบอท¤\n\n¤ ฉัน\n¤ รหัส\n¤ รหัสกลุ่ม\n¤ กลุ่ม\n¤ เช็คความเร็ว\n¤ ข้อมูลกลุ่ม\n¤ ลิ้งค์\n¤ เปิดลิ้งค์\n¤ ปิดลิ้งค์\n¤ แท็ก\n¤ นับ 「เริ่มเช็คคนอ่าน」\n¤ อ่าน 「อ่านคนแอบ」\n¤ คัดลอกข้อมูล @\n¤ สำรองข้อมูล\n¤ บล็อก @\n¤ รายการบล็อก")
                 if msg.text in ["เช็คความเร็ว","Speed","speed"]:
                     start = time.time()
                     sendMessage(msg.to, text="Please wait.....", contentMetadata=None, contentType=None)
@@ -222,7 +222,7 @@ def SEND_MESSAGE(op):
                     group = client.getGroup(msg.to)
                     group.name = key
                     client.updateGroup(group)
-                    sendMessage(msg.to,"Group Name"+key+"Canged to")
+                    sendMessage(msg.to,"ชื่อกลุ่ม"+key+"เปลี่ยนไปเป็น")
                 if msg.text == "ข้อมูลลิ้งค์":
                     sendMessage(msg.to,"line://ti/g/" + client._client.reissueGroupTicket(msg.to))
                 if msg.text == "เปิดลิ้งค์":
@@ -254,7 +254,7 @@ def SEND_MESSAGE(op):
                     client.findAndAddContactsByMid(key)
                     client.inviteIntoGroup(msg.to, [key])
                     contact = client.getContact(key)
-                    sendMessage(msg.to, ""+contact.displayName+" นั่นคือเพื่อนของฉันได้รับอนุญาตให้ป้อนข้อมูล")
+                    sendMessage(msg.to, ""+contact.displayName+" that's my friend's permission to inpit")
                 if msg.text == "ฉัน":
                     M = Message()
                     M.to = msg.to
@@ -389,7 +389,7 @@ def SEND_MESSAGE(op):
                     sendMessage(msg.to, "รอสักครู่กำลังเช็คข้อมูล......")
                     kontak = client.getContacts(blockedlist)
                     num=1
-                    msgs="User Blocked List\n"
+                    msgs="รายการบล็อก\n"
                     for ids in kontak:
                         msgs+="\n%i. %s" % (num, ids.displayName)
                         num=(num+1)
