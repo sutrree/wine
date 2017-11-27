@@ -223,7 +223,7 @@ def SEND_MESSAGE(op):
                     group.name = key
                     client.updateGroup(group)
                     sendMessage(msg.to,"Group Name"+key+"Canged to")
-                if msg.text == "ลิ้งค์":
+                if msg.text == "ข้อมูลลิ้งค์":
                     sendMessage(msg.to,"line://ti/g/" + client._client.reissueGroupTicket(msg.to))
                 if msg.text == "เปิดลิ้งค์":
                     group = client.getGroup(msg.to)
@@ -233,7 +233,7 @@ def SEND_MESSAGE(op):
                         group.preventJoinByTicket = False
                         client.updateGroup(group)
                         sendMessage(msg.to, "เปิดลิ้งค์เรียบร้อย")
-                if msg.text == "ปิดลิ้ง":
+                if msg.text == "ปิดลิ้งค์":
                     group = client.getGroup(msg.to)
                     if group.preventJoinByTicket == True:
                         sendMessage(msg.to, "ปิดอยู่แล้ว")
@@ -254,7 +254,7 @@ def SEND_MESSAGE(op):
                     client.findAndAddContactsByMid(key)
                     client.inviteIntoGroup(msg.to, [key])
                     contact = client.getContact(key)
-                    sendMessage(msg.to, ""+contact.displayName+" that's my friend's permission to inpit")
+                    sendMessage(msg.to, ""+contact.displayName+" นั่นคือเพื่อนของฉันได้รับอนุญาตให้ป้อนข้อมูล")
                 if msg.text == "ฉัน":
                     M = Message()
                     M.to = msg.to
