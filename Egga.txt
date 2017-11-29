@@ -175,11 +175,11 @@ def SEND_MESSAGE(op):
     try:
         if msg.toType == 0:
             if msg.contentType == 0:
-                if msg.text == "mid":
+                if msg.text == "รหัส":
                     sendMessage(msg.to, msg.to)
-                if msg.text == "me":
+                if msg.text == "ฉัน":
                     sendMessage(msg.to, text=None, contentMetadata={'mid': msg.from_}, contentType=13)
-                if msg.text == "gift":
+                if msg.text == "กิ๊ฟ":
                     sendMessage(msg.to, text="gift sent", contentMetadata=None, contentType=9)
                 else:
                     pass
@@ -198,11 +198,11 @@ def SEND_MESSAGE(op):
                 pass
         if msg.toType == 2:
             if msg.contentType == 0:
-                if msg.text == "mid":
+                if msg.text == "รหัส":
                     sendMessage(msg.to, msg.from_)
-                if msg.text == "gid":
+                if msg.text == "รหัสกลุ่ม":
                     sendMessage(msg.to, msg.to)
-                if msg.text == "ginfo":
+                if msg.text == "ข้อมูลกลุ่ม":
                     group = client.getGroup(msg.to)
                     md = "[ชื่อกลุ่ม]\n" + group.name + "\n\n[รหัสกลุ่ม]\n" + group.id + "\n\n[รูปภาพกลุ่ม]\nhttp://dl.profile.line-cdn.net/" + group.pictureStatus
                     if group.preventJoinByTicket is False: md += "\n\nคำเชิญ URL: ที่ได้รับอนุญาต\n"
@@ -223,7 +223,7 @@ def SEND_MESSAGE(op):
                     group.name = key
                     client.updateGroup(group)
                     sendMessage(msg.to,"Group Name"+key+"Canged to")
-                if msg.text == "ลิ้งค์":
+                if msg.text == "ขอลิ้งค์":
                     sendMessage(msg.to,"line://ti/g/" + client._client.reissueGroupTicket(msg.to))
                 if msg.text == "เปิดลิ้งค์":
                     group = client.getGroup(msg.to)
@@ -358,7 +358,7 @@ def SEND_MESSAGE(op):
                                 sendMessage(msg.to, "รายการคัคลอกข้อมูลสำเร็จ ~")
                             except Exception as e:
                                 print e    
-                elif msg.text in ["สำรองข้อมูล","backup"]:
+                elif msg.text in ["สำรองข้อมูล"]:
                     try:
                         client.updateDisplayPicture(backup.pictureStatus)
                         client.updateProfile(backup)
